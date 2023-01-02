@@ -51,7 +51,7 @@ done
 
 echo ""
 
-[ -d "$path" ] && ( ! [ $quiet = true ] && echo "folder does exits" || echo "" ) || { echo "provided folder does not exist!"; exit 1; };
+[ -d "$path" ] && ( [ $verbose = true ] && echo "folder does exits" || echo "" ) || { echo "provided folder does not exist!"; exit 1; };
 
 if [ $# -eq 0 ]
 then
