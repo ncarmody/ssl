@@ -1,7 +1,5 @@
 **checkout ssl connections of different websites**
 
-this script ....
-
 ## Installation
 
 Install python 3.9.2. Checkout pyenv [installation](https://github.com/pyenv/pyenv-installer)
