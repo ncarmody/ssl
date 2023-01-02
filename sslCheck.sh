@@ -51,6 +51,7 @@ done
 
 echo ""
 
+[ -d "$path" ] && ( ! [ $quiet = true ] && echo "folder does exits" || echo "" ) || { echo "provided folder does not exist!"; exit 1; };
 
 if [ $# -eq 0 ]
 then
@@ -62,6 +63,6 @@ ping google.ch -w 2 -c 1 -q  >> /dev/null 2>&1;
 
 [ $? -ne 0 ] && echo "check your internet connection! you might be disconnected" && exit || ! [ $quiet = true ] && echo "" && echo "internet connection ok" && echo ""
 
-curl -s --head ${hostname} | head -n 1 | grep "HTTP/1.[01] [23]..">> /dev/null 2>&1 && echo "starting main.py" &&  python main.py -n ${hostname} -p ${path} -q ${quiet} -i ${info} -c ${compare} -v $verbose
+curl -s --head ${hostname} | head -n 1 | grep "HTTP/1.[01] [23]..">> /dev/null 2>&1 && echo "starting main.py" &&  poetry run python main.py -n ${hostname} -p ${path} -q ${quiet} -i ${info} -c ${compare} -v $verbose
 
 
