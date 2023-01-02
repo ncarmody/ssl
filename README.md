@@ -85,7 +85,7 @@ python main.py --help
 
 sslCheck.sh saves the following into the data folder:
 
-- the ssl certificate as a .cert file
+- the ssl certificate as a .der file
 - if the flag -i is enabled:
   - a .txt file with the information data
 - if the flag -c is enabled:
