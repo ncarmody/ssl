@@ -42,6 +42,12 @@ The script can show additional information about the ssl connection by running:
 ./sslCheck.sh -i
 ```
 
+Provide your own URL and print additional information about the ssl certificate by running:
+
+```bash
+./sslCheck.sh -in <myOwnUrl.com>
+```
+
 Note: sslCheck.sh works without testssl.sh. The compare functionality can't be used (-c flag) if testssl.sh is not installed.
 
 Install testssl for the "compare" functionality of the script by running:
