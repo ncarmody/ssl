@@ -26,6 +26,11 @@ def GetSSLInformation(hostname, verbose, **kwargs):
           cert = ssock.getpeercert()
           
           # read this information out from cert object if interesting
+          # example of cert structure to be iterated over:
+          # cert: {'subject': ((('countryName', 'CH'),), (('stateOrProvinceName', 'BE'),), (('localityName', 'Worblaufen'),), (('organizationName', 'Swisscom (Schweiz) AG'),), (('commonName', 'www.swisscom.com'),)), 'issuer': ((('countryName', 'CH'),), (('organizationName', 'SwissSign AG'),), (('commonName', 'SwissSign RSA TLS OV ICA 2021 - 1'),)), 'version': 3, 'serialNumber': '29BB185B451904A2180BB4435080333ECB84A57E'...} 
+          # 
+          # ->cert strucutre: dictionary(key: tuples(tuples(tuples(key, values))), key: string, ...)
+          
           for keys, values in zip(cert.keys(), cert.values()):
             # read out the tuples in a specified order
             if str(type(values))!="<class 'tuple'>":
@@ -52,10 +57,9 @@ def GetSSLInformation(hostname, verbose, **kwargs):
           
           # read out information about server peer name
           writeInfo+="\n".join(["peerName: ", *[f"\t{peerKey}: {peerValue}" for peerKey, peerValue in zip(["ip", "port"], ssock.getpeername())]])
-  print(writeInfo)
   return writeInfo
 
-def GetServerCertificate(hostname,verbose,  path=f"{ROOT_DIR}/data", **kwargs):
+def GetServerCertificate(hostname, verbose,  path=f"{ROOT_DIR}/data", **kwargs):
   # print out additional information about the task
   if getBoolean(verbose): print("run GetServerCertificate"); print(f"path: {path}")
 
@@ -63,6 +67,7 @@ def GetServerCertificate(hostname,verbose,  path=f"{ROOT_DIR}/data", **kwargs):
   f = open(f"{path}/{str(hostname).replace('.', '_')}_cert.der",'wb')
   
   # read out the certificate
+  # Retrieve the certificate from the server at the specified address, and return it as a PEM-encoded string (Base64 ASCII encoding)
   cert = ssl.get_server_certificate((hostname, port))
   
   # dave it as .der file into the path provided
@@ -70,7 +75,6 @@ def GetServerCertificate(hostname,verbose,  path=f"{ROOT_DIR}/data", **kwargs):
   
   # write information out to stdout
   writeInfo = f"**************\n CERTIFICATE OF {str(hostname).upper()}\n  {cert}\n**************\n"
-  print(writeInfo)
   return writeInfo
 
 def GetAPIInfo(verbose, **kwargs):

@@ -4,7 +4,7 @@ import os
 from utils.parseArgs import getBoolean
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-def RunBackgroundProcess(hostname,verbose, *args, **kwargs):
+def RunBackgroundProcess(hostname, verbose, *args, **kwargs):
   
   # give some info about running task
   if getBoolean(verbose): print("run RunBackgroundProcess")

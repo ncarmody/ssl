@@ -67,7 +67,7 @@ ping google.ch -w 2 -c 1 -q  >> /dev/null 2>&1;
 
 [ $? -ne 0 ] && echo "check your internet connection! you might be disconnected" && exit || ! [ $quiet = true ] && echo "" && echo "internet connection ok" && echo ""
 
-#check valid domain name
-curl -s --head ${hostname} | head -n 1 | grep "HTTP/1.[01] [23]..">> /dev/null 2>&1 && echo "starting main.py" &&  poetry run python main.py -n ${hostname} -p ${path} -q ${quiet} -i ${info} -c ${compare} -v $verbose
+#check valid URL
+curl -s --head ${hostname} | head -n 1 | grep "HTTP/1.[01] [23]..">> /dev/null 2>&1 && echo "starting main.py" &&  poetry run python main.py -n ${hostname} -p ${path} -q ${quiet} -i ${info} -c ${compare} -v ${verbose}
 
 
